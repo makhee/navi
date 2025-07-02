@@ -42,6 +42,13 @@
             margin-top: 20px;
             line-height: 1.5;
         }
+        .info code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            word-break: break-all;
+        }
         .error {
             color: #e74c3c;
             background: #ffeaea;
@@ -63,7 +70,9 @@
         
         <div class="info">
             버튼을 클릭하면 카카오내비 앱에서<br>
-            현대백화점 판교점으로 길 안내가 시작됩니다.
+            현대백화점 판교점으로 길 안내가 시작됩니다.<br><br>
+            <strong>자동 실행 URL:</strong><br>
+            <code id="auto-url"></code>
         </div>
         
         <div id="error-message" class="error" style="display: none;"></div>
@@ -106,7 +115,21 @@
             errorDiv.style.display = 'block';
         }
 
-        // 페이지 로드 시 카카오 SDK 상태 확인
+        // URL 파라미터에서 자동 실행 여부 확인
+        function checkAutoStart() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const shouldAutoStart = urlParams.get('auto') === 'true';
+            
+            if (shouldAutoStart) {
+                console.log('자동 실행 모드 감지됨');
+                // 약간의 지연 후 자동 실행 (SDK 로딩 완료 대기)
+                setTimeout(() => {
+                    startNavigation();
+                }, 1000);
+            }
+        }
+
+        // 페이지 로드 시 카카오 SDK 상태 확인 및 자동 실행 체크
         window.onload = function() {
             if (typeof Kakao === 'undefined') {
                 showError('카카오 SDK를 로드할 수 없습니다.');
@@ -119,6 +142,14 @@
             }
             
             console.log('모든 준비가 완료되었습니다.');
+            
+            // 현재 URL에 자동 실행 파라미터 추가해서 표시
+            const currentUrl = window.location.href.split('?')[0];
+            const autoUrl = currentUrl + '?auto=true';
+            document.getElementById('auto-url').textContent = autoUrl;
+            
+            // 자동 실행 체크
+            checkAutoStart();
         };
     </script>
 </body>
