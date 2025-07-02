@@ -361,20 +361,11 @@
     </div>
 
     <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
-    <script defer src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
             integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
             crossorigin="anonymous"></script>
     
     <script>
-        // 카카오 SDK 초기화
-        try {
-            Kakao.init('57c4586996128697ee51e27bfd6a84d5');
-            console.log('💒 결혼식 네비게이션 초기화 완료');
-        } catch (error) {
-            console.error('카카오 SDK 초기화 실패:', error);
-            showError('네비게이션 초기화에 실패했습니다. 잠시 후 다시 시도해주세요.');
-        }
-
         function shareLocation() {
             try {
                 // 자동 실행일 때는 바로 내비 실행, 수동일 때는 공유
@@ -429,16 +420,11 @@
         // 페이지 로드 시 초기화 (window.onload 사용)
         window.onload = function() {
             // SDK 로딩을 위한 충분한 대기
-            setTimeout(() => {
-                if (typeof Kakao === 'undefined') {
-                    showError('카카오 서비스를 로드할 수 없습니다.');
-                    return;
-                }
-                
+            setTimeout(() => {              
                 if (!Kakao.isInitialized()) {
                     try {
                         Kakao.init('57c4586996128697ee51e27bfd6a84d5');
-                        console.log('💒 카카오 SDK 재초기화 완료');
+                        console.log('💒 카카오 SDK 초기화 완료');
                     } catch (error) {
                         showError('카카오 서비스 초기화에 실패했습니다.');
                         return;
