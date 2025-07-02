@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 내비게이션 길 안내</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .destination {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        #start-navigation {
+            display: inline-block;
+            margin: 20px 0;
+            transition: transform 0.2s;
+        }
+        #start-navigation:hover {
+            transform: scale(1.05);
+        }
+        .info {
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        .error {
+            color: #e74c3c;
+            background: #ffeaea;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗺️ 카카오 내비게이션</h1>
+        <div class="destination">📍 현대백화점 판교점</div>
+        
+        <a id="start-navigation" href="javascript:startNavigation()">
+            <img src="https://developers.kakao.com/assets/img/about/buttons/navi/kakaonavi_btn_medium.png" 
+                 alt="길 안내하기 버튼" />
+        </a>
+        
+        <div class="info">
+            버튼을 클릭하면 카카오내비 앱에서<br>
+            현대백화점 판교점으로 길 안내가 시작됩니다.
+        </div>
+        
+        <div id="error-message" class="error" style="display: none;"></div>
+    </div>
+
+    <!-- 카카오 JavaScript SDK -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" 
+            integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlfcG4PGpMkE1vcL7kNXI6Cci0" 
+            crossorigin="anonymous"></script>
+    
+    <script>
+        // 카카오 SDK 초기화
+        try {
+            Kakao.init('57c4586996128697ee51e27bfd6a84d5'); // 사용하려는 앱의 JavaScript 키
+            console.log('카카오 SDK 초기화 완료');
+        } catch (error) {
+            console.error('카카오 SDK 초기화 실패:', error);
+            showError('카카오 SDK 초기화에 실패했습니다.');
+        }
+
+        function startNavigation() {
+            try {
+                // 카카오내비 길 안내 시작
+                Kakao.Navi.start({
+                    name: '현대백화점 판교점',
+                    x: 127.11205203011632,
+                    y: 37.39279717586919,
+                    coordType: 'wgs84'
+                });
+                console.log('내비게이션 시작 요청 완료');
+            } catch (error) {
+                console.error('내비게이션 시작 실패:', error);
+                showError('내비게이션을 시작할 수 없습니다. 카카오내비 앱이 설치되어 있는지 확인해주세요.');
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // 페이지 로드 시 카카오 SDK 상태 확인
+        window.onload = function() {
+            if (typeof Kakao === 'undefined') {
+                showError('카카오 SDK를 로드할 수 없습니다.');
+                return;
+            }
+            
+            if (!Kakao.isInitialized()) {
+                showError('카카오 SDK가 초기화되지 않았습니다.');
+                return;
+            }
+            
+            console.log('모든 준비가 완료되었습니다.');
+        };
+    </script>
+</body>
+</html>
