@@ -261,7 +261,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const isAutoMode = urlParams.get('auto') === 'true';
                 
-                if (isAutoMode) {
+                if (!isAutoMode) {
                     // 자동 모드: 바로 카카오내비 실행
                     Kakao.Navi.start({
                         name: '유호재 결혼식 - 현대백화점 판교점',
