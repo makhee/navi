@@ -241,7 +241,7 @@
     </div>
 
     <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
+    <script defer src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
             integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
             crossorigin="anonymous"></script>
     
@@ -261,7 +261,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const isAutoMode = urlParams.get('auto') === 'true';
                 
-                if (!isAutoMode) {
+                if (isAutoMode) {
                     // 자동 모드: 바로 카카오내비 실행
                     Kakao.Navi.start({
                         name: '유호재 결혼식 - 현대백화점 판교점',
@@ -295,8 +295,8 @@
                 console.log('💝 자동 네비게이션 모드 감지됨');
                 // 약간의 지연 후 자동 실행
                 setTimeout(() => {
-                    document.getElementById('share-location').click();
-                }, 2000);
+                    shareLocation();
+                }, 1000);
             }
         }
 
