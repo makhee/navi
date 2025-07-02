@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 내비게이션 목적지 공유</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .destination {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        #share-location {
+            display: inline-block;
+            margin: 20px 0;
+            transition: transform 0.2s;
+        }
+        #share-location:hover {
+            transform: scale(1.05);
+        }
+        .info {
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        .info code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            word-break: break-all;
+        }
+        .error {
+            color: #e74c3c;
+            background: #ffeaea;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .share-type {
+            background: #e8f4fd;
+            color: #1565c0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📤 카카오 내비게이션 공유</h1>
+        <div class="destination">📍 현대백화점 판교점</div>
+        
+        <div class="share-type">목적지 공유하기</div>
+        
+        <a id="share-location" href="javascript:shareLocation()">
+            <img src="https://developers.kakao.com/assets/img/about/buttons/navi/kakaonavi_btn_medium.png" 
+                 alt="목적지 공유하기 버튼" />
+        </a>
+        
+        <div class="info">
+            버튼을 클릭하면 현대백화점 판교점 위치를<br>
+            카카오톡, 문자메시지 등으로 공유할 수 있습니다.<br><br>
+            <strong>자동 공유 URL:</strong><br>
+            <code id="auto-url"></code>
+        </div>
+        
+        <div id="error-message" class="error" style="display: none;"></div>
+    </div>
+
+    <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
+            integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
+            crossorigin="anonymous"></script>
+    
+    <script>
+        // 카카오 SDK 초기화
+        try {
+            Kakao.init('57c4586996128697ee51e27bfd6a84d5'); // 사용하려는 앱의 JavaScript 키
+            console.log('카카오 SDK 초기화 완료');
+        } catch (error) {
+            console.error('카카오 SDK 초기화 실패:', error);
+            showError('카카오 SDK 초기화에 실패했습니다.');
+        }
+
+        function shareLocation() {
+            try {
+                // 카카오내비 목적지 공유
+                Kakao.Navi.share({
+                    name: '현대백화점 판교점',
+                    x: 127.11205203011632,
+                    y: 37.39279717586919,
+                    coordType: 'wgs84'
+                });
+                console.log('목적지 공유 창 열기 완료');
+            } catch (error) {
+                console.error('목적지 공유 실패:', error);
+                showError('목적지를 공유할 수 없습니다. 카카오톡이 설치되어 있는지 확인해주세요.');
+            }
+        }
+
+        // URL 파라미터에서 자동 공유 여부 확인
+        function checkAutoShare() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const shouldAutoShare = urlParams.get('auto') === 'true';
+            
+            if (shouldAutoShare) {
+                console.log('자동 공유 모드 감지됨');
+                // 약간의 지연 후 자동 공유 (SDK 로딩 완료 대기)
+                setTimeout(() => {
+                    shareLocation();
+                }, 1000);
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // 페이지 로드 시 카카오 SDK 상태 확인 및 자동 공유 체크
+        window.onload = function() {
+            if (typeof Kakao === 'undefined') {
+                showError('카카오 SDK를 로드할 수 없습니다.');
+                return;
+            }
+            
+            if (!Kakao.isInitialized()) {
+                showError('카카오 SDK가 초기화되지 않았습니다.');
+                return;
+            }
+            
+            console.log('모든 준비가 완료되었습니다.');
+            
+            // 현재 URL에 자동 공유 파라미터 추가해서 표시
+            const currentUrl = window.location.href.split('?')[0];
+            const autoUrl = currentUrl + '?auto=true';
+            document.getElementById('auto-url').textContent = autoUrl;
+            
+            // 자동 공유 체크
+            checkAutoShare();
+        };
+    </script>
+</body>
+</html>
