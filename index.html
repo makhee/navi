@@ -3,86 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>카카오 내비게이션 목적지 공유</title>
+    <title>유호재 결혼식 네비게이션</title>
     <style>
-        body {
-            font-family: 'Malgun Gothic', sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #f5f5f5;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
         .container {
             max-width: 400px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 300% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .heart-decoration {
+            font-size: 20px;
+            margin-bottom: 15px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
         h1 {
-            color: #333;
-            margin-bottom: 30px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .wedding-info {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+        
+        .groom-bride {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+        
         .destination {
             font-size: 18px;
-            color: #666;
-            margin-bottom: 20px;
+            color: #34495e;
+            margin-bottom: 5px;
+            font-weight: 500;
         }
+        
+        .date-time {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+        
+        .nav-section {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .section-title {
+            color: #3498db;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
         #share-location {
             display: inline-block;
-            margin: 20px 0;
-            transition: transform 0.2s;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            margin: 10px 0;
         }
+        
         #share-location:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
+        
+        #share-location img {
+            max-width: 100%;
+            height: auto;
+        }
+        
         .info {
+            background: rgba(236, 240, 241, 0.8);
+            border-radius: 12px;
+            padding: 15px;
             font-size: 14px;
-            color: #888;
+            color: #34495e;
+            line-height: 1.6;
             margin-top: 20px;
-            line-height: 1.5;
         }
+        
         .info code {
-            background: #f0f0f0;
-            padding: 2px 6px;
-            border-radius: 3px;
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+            padding: 4px 8px;
+            border-radius: 6px;
             font-size: 12px;
             word-break: break-all;
+            font-weight: 500;
         }
+        
         .error {
             color: #e74c3c;
-            background: #ffeaea;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #e74c3c;
         }
-        .share-type {
-            background: #e8f4fd;
-            color: #1565c0;
-            padding: 8px 12px;
-            border-radius: 5px;
-            margin: 10px 0;
-            font-weight: bold;
+        
+        .blessing {
+            margin-top: 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 12px;
+            font-style: italic;
+            color: #2c3e50;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .icons {
+            font-size: 18px;
+            margin: 0 5px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .groom-bride {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📤 카카오 내비게이션 공유</h1>
-        <div class="destination">📍 현대백화점 판교점</div>
+        <div class="heart-decoration">💝 💒 💝</div>
         
-        <div class="share-type">목적지 공유하기</div>
+        <h1>결혼식 초대</h1>
+        <div class="subtitle">따뜻한 마음으로 초대합니다</div>
         
-        <a id="share-location" href="javascript:shareLocation()">
-            <img src="https://developers.kakao.com/assets/img/about/buttons/navi/kakaonavi_btn_medium.png" 
-                 alt="목적지 공유하기 버튼" />
-        </a>
+        <div class="wedding-info">
+            <div class="groom-bride">👰‍♀️ 유호재 🤵‍♂️</div>
+            <div class="destination">📍 현대백화점 판교점</div>
+            <div class="date-time">🗓️ 특별한 날의 특별한 순간</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="section-title">🚗 길 안내받기</div>
+            
+            <a id="share-location" href="javascript:shareLocation()">
+                <span class="icons">🧭</span>
+                카카오내비로 길 안내
+                <span class="icons">📱</span>
+            </a>
+        </div>
         
         <div class="info">
-            버튼을 클릭하면 현대백화점 판교점 위치를<br>
-            카카오톡, 문자메시지 등으로 공유할 수 있습니다.<br><br>
-            <strong>자동 공유 URL:</strong><br>
-            <code id="auto-url"></code>
+            📲 버튼을 클릭하면 카카오내비에서<br>
+            결혼식장까지의 길을 안내받을 수 있습니다.
+        </div>
+        
+        <div class="blessing">
+            🌸 두 사람의 아름다운 시작을 축복하며,<br>
+            소중한 분들과 함께 나누고 싶은 기쁜 날입니다 🌸
         </div>
         
         <div id="error-message" class="error" style="display: none;"></div>
@@ -96,37 +248,52 @@
     <script>
         // 카카오 SDK 초기화
         try {
-            Kakao.init('57c4586996128697ee51e27bfd6a84d5'); // 사용하려는 앱의 JavaScript 키
-            console.log('카카오 SDK 초기화 완료');
+            Kakao.init('57c4586996128697ee51e27bfd6a84d5');
+            console.log('💒 결혼식 네비게이션 초기화 완료');
         } catch (error) {
             console.error('카카오 SDK 초기화 실패:', error);
-            showError('카카오 SDK 초기화에 실패했습니다.');
+            showError('네비게이션 초기화에 실패했습니다. 잠시 후 다시 시도해주세요.');
         }
 
         function shareLocation() {
             try {
-                // 카카오내비 목적지 공유
-                Kakao.Navi.share({
-                    name: '현대백화점 판교점',
-                    x: 127.11205203011632,
-                    y: 37.39279717586919,
-                    coordType: 'wgs84'
-                });
-                console.log('목적지 공유 창 열기 완료');
+                // 자동 실행일 때는 바로 내비 실행, 수동일 때는 공유
+                const urlParams = new URLSearchParams(window.location.search);
+                const isAutoMode = urlParams.get('auto') === 'true';
+                
+                if (isAutoMode) {
+                    // 자동 모드: 바로 카카오내비 실행
+                    Kakao.Navi.start({
+                        name: '유호재 결혼식 - 현대백화점 판교점',
+                        x: 127.11205203011632,
+                        y: 37.39279717586919,
+                        coordType: 'wgs84'
+                    });
+                    console.log('🚗 자동으로 네비게이션 시작');
+                } else {
+                    // 수동 모드: 공유 옵션 제공
+                    Kakao.Navi.share({
+                        name: '유호재 결혼식 - 현대백화점 판교점',
+                        x: 127.11205203011632,
+                        y: 37.39279717586919,
+                        coordType: 'wgs84'
+                    });
+                    console.log('💌 결혼식장 위치 공유 창 열기');
+                }
             } catch (error) {
-                console.error('목적지 공유 실패:', error);
-                showError('목적지를 공유할 수 없습니다. 카카오톡이 설치되어 있는지 확인해주세요.');
+                console.error('네비게이션 실행 실패:', error);
+                showError('네비게이션을 실행할 수 없습니다. 카카오내비 앱이 설치되어 있는지 확인해주세요.');
             }
         }
 
-        // URL 파라미터에서 자동 공유 여부 확인
-        function checkAutoShare() {
+        // URL 파라미터에서 자동 실행 여부 확인
+        function checkAutoStart() {
             const urlParams = new URLSearchParams(window.location.search);
-            const shouldAutoShare = urlParams.get('auto') === 'true';
+            const shouldAutoStart = urlParams.get('auto') === 'true';
             
-            if (shouldAutoShare) {
-                console.log('자동 공유 모드 감지됨');
-                // 약간의 지연 후 자동 공유 (SDK 로딩 완료 대기)
+            if (shouldAutoStart) {
+                console.log('💝 자동 네비게이션 모드 감지됨');
+                // 약간의 지연 후 자동 실행
                 setTimeout(() => {
                     shareLocation();
                 }, 1000);
@@ -139,27 +306,22 @@
             errorDiv.style.display = 'block';
         }
 
-        // 페이지 로드 시 카카오 SDK 상태 확인 및 자동 공유 체크
+        // 페이지 로드 시 초기화
         window.onload = function() {
             if (typeof Kakao === 'undefined') {
-                showError('카카오 SDK를 로드할 수 없습니다.');
+                showError('카카오 서비스를 로드할 수 없습니다.');
                 return;
             }
             
             if (!Kakao.isInitialized()) {
-                showError('카카오 SDK가 초기화되지 않았습니다.');
+                showError('카카오 서비스가 초기화되지 않았습니다.');
                 return;
             }
             
-            console.log('모든 준비가 완료되었습니다.');
+            console.log('💒 유호재 결혼식 네비게이션 준비 완료!');
             
-            // 현재 URL에 자동 공유 파라미터 추가해서 표시
-            const currentUrl = window.location.href.split('?')[0];
-            const autoUrl = currentUrl + '?auto=true';
-            document.getElementById('auto-url').textContent = autoUrl;
-            
-            // 자동 공유 체크
-            checkAutoShare();
+            // 자동 실행 체크
+            checkAutoStart();
         };
     </script>
 </body>
