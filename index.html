@@ -12,332 +12,356 @@
         }
         
         body {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            background: linear-gradient(45deg, #ff0000, #ff4500, #ff6b00, #ff8c00);
-            background-size: 400% 400%;
-            animation: angrybg 2s ease infinite;
+            font-family: 'Courier New', 'MS Gothic', monospace;
+            background: linear-gradient(180deg, #e6f3ff 0%, #f0f8ff 50%, #fff0f8 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow-x: hidden;
+            position: relative;
         }
         
-        @keyframes angrybg {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 4px,
+                    rgba(173, 216, 230, 0.1) 4px,
+                    rgba(173, 216, 230, 0.1) 8px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 4px,
+                    rgba(255, 182, 193, 0.1) 4px,
+                    rgba(255, 182, 193, 0.1) 8px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
         
         .container {
-            max-width: 400px;
+            max-width: 380px;
             width: 100%;
-            background: linear-gradient(135deg, #000000, #1a1a1a, #333333);
-            border: 3px solid #ff0000;
-            border-radius: 20px;
-            padding: 30px;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.95), 
+                    rgba(173, 216, 230, 0.1), 
+                    rgba(255, 182, 193, 0.1)
+                );
+            border: 2px solid #add8e6;
+            border-radius: 0;
+            padding: 30px 25px;
             box-shadow: 
-                0 0 20px #ff0000,
-                inset 0 0 20px rgba(255, 0, 0, 0.2);
+                4px 4px 0px #ffb6c1,
+                8px 8px 0px rgba(173, 216, 230, 0.3);
             text-align: center;
             position: relative;
-            animation: shake 0.5s infinite;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-2px) rotate(-0.5deg); }
-            75% { transform: translateX(2px) rotate(0.5deg); }
+            z-index: 2;
         }
         
         .container::before {
             content: '';
             position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, #ff0000, #ff4500, #ff8c00, #ffff00);
-            border-radius: 25px;
-            z-index: -1;
-            animation: borderflash 1s ease infinite;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background: linear-gradient(90deg, #add8e6, #ffb6c1, #dda0dd);
+            opacity: 0.6;
         }
         
-        @keyframes borderflash {
-            0%, 100% { opacity: 0.8; }
+        .y2k-decoration {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #6b8db5;
+            animation: gentlefade 3s ease infinite;
+        }
+        
+        @keyframes gentlefade {
+            0%, 100% { opacity: 0.7; }
             50% { opacity: 1; }
         }
         
-        .angry-decoration {
-            font-size: 40px;
-            margin-bottom: 10px;
-            animation: angryface 1s ease infinite;
-            text-shadow: 0 0 10px #ff0000;
-        }
-        
-        @keyframes angryface {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.2) rotate(-5deg); }
-            75% { transform: scale(1.2) rotate(5deg); }
-        }
-        
         h1 {
-            color: #ff0000;
-            margin-bottom: 10px;
-            font-size: 32px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 
-                2px 2px 0px #000000,
-                0 0 10px #ff0000;
-            animation: textvibrate 0.3s ease infinite;
-        }
-        
-        @keyframes textvibrate {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-1px); }
+            color: #4a6fa5;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 0px rgba(255, 182, 193, 0.5);
         }
         
         .subtitle {
-            color: #ffff00;
-            font-size: 18px;
-            margin-bottom: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000000;
-            animation: blink 1s ease infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            color: #8b7da8;
+            font-size: 14px;
+            margin-bottom: 25px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
         }
         
         .wedding-info {
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-            border: 2px solid #ffff00;
-            border-radius: 15px;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.8), 
+                    rgba(173, 216, 230, 0.15)
+                );
+            border: 1px solid #add8e6;
+            border-radius: 0;
             padding: 20px;
-            margin-bottom: 20px;
-            color: #ffffff;
-            box-shadow: 
-                0 0 15px #ff0000,
-                inset 0 0 15px rgba(255, 255, 0, 0.2);
-            animation: pulse 2s ease infinite;
+            margin-bottom: 25px;
+            position: relative;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .wedding-info::before {
+            content: '◦ wedding data ◦';
+            position: absolute;
+            top: -8px;
+            left: 15px;
+            background: #f0f8ff;
+            color: #6b8db5;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         .groom-bride {
-            font-size: 28px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 0px #000000;
-            animation: textglow 1s ease infinite;
-        }
-        
-        @keyframes textglow {
-            0%, 100% { text-shadow: 3px 3px 0px #000000; }
-            50% { text-shadow: 3px 3px 0px #000000, 0 0 20px #ffff00; }
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #5a7ba5;
+            letter-spacing: 1px;
+            text-transform: lowercase;
         }
         
         .destination {
-            font-size: 20px;
-            color: #ffff00;
-            margin-bottom: 5px;
-            font-weight: 900;
-            text-shadow: 2px 2px 0px #000000;
+            font-size: 16px;
+            color: #8b7da8;
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         
         .date-time {
-            font-size: 16px;
-            color: #ffffff;
-            font-weight: 700;
-            text-shadow: 1px 1px 0px #000000;
+            font-size: 12px;
+            color: #a8a8a8;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
         
         .nav-section {
-            background: linear-gradient(45deg, #000000, #333333);
-            border: 3px solid #ff4500;
-            border-radius: 15px;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.6), 
+                    rgba(221, 160, 221, 0.1)
+                );
+            border: 1px solid #dda0dd;
+            border-radius: 0;
             padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 0 15px #ff4500;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .nav-section::before {
+            content: '◦ navigation ◦';
+            position: absolute;
+            top: -8px;
+            left: 15px;
+            background: #f0f8ff;
+            color: #8b7da8;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         .section-title {
-            color: #ff4500;
-            font-size: 20px;
-            font-weight: 900;
+            color: #8b7da8;
+            font-size: 14px;
+            font-weight: 600;
             margin-bottom: 15px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000000;
+            letter-spacing: 1px;
+            text-transform: lowercase;
         }
         
         #share-location {
             display: inline-block;
-            padding: 20px 30px;
-            background: linear-gradient(45deg, #ff0000, #ff4500, #ff8c00);
-            border: 3px solid #ffff00;
-            border-radius: 15px;
+            padding: 12px 24px;
+            background: 
+                linear-gradient(135deg, 
+                    #add8e6, 
+                    #b6d7f0
+                );
+            border: 1px solid #87ceeb;
+            border-radius: 0;
             color: #ffffff;
             text-decoration: none;
-            font-weight: 900;
-            font-size: 18px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000000;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             box-shadow: 
-                0 5px 15px rgba(255, 0, 0, 0.5),
-                0 0 20px #ff0000;
+                2px 2px 0px rgba(255, 182, 193, 0.4);
             margin: 10px 0;
-            animation: buttonbounce 2s ease infinite;
+            position: relative;
         }
         
-        @keyframes buttonbounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        #share-location::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         #share-location:hover {
-            transform: scale(1.1) rotate(2deg);
+            transform: translate(-1px, -1px);
             box-shadow: 
-                0 8px 25px rgba(255, 0, 0, 0.8),
-                0 0 30px #ff0000;
-            animation: buttoncrazy 0.2s ease infinite;
+                3px 3px 0px rgba(255, 182, 193, 0.6);
         }
         
-        @keyframes buttoncrazy {
-            0%, 100% { transform: scale(1.1) rotate(2deg); }
-            25% { transform: scale(1.15) rotate(-2deg); }
-            75% { transform: scale(1.05) rotate(2deg); }
-        }
-        
-        #share-location img {
-            max-width: 100%;
-            height: auto;
-            filter: hue-rotate(0deg) saturate(2);
+        #share-location:hover::before {
+            opacity: 1;
         }
         
         .info {
-            background: linear-gradient(45deg, #333333, #000000);
-            border: 2px solid #ff8c00;
-            border-radius: 12px;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.7), 
+                    rgba(173, 216, 230, 0.1)
+                );
+            border: 1px solid rgba(173, 216, 230, 0.5);
+            border-radius: 0;
             padding: 15px;
-            font-size: 16px;
-            color: #ffffff;
+            font-size: 12px;
+            color: #6b8db5;
             line-height: 1.6;
-            margin-top: 20px;
-            font-weight: 700;
-            text-shadow: 1px 1px 0px #000000;
-            box-shadow: 0 0 10px #ff8c00;
+            margin-top: 25px;
+            font-weight: 400;
+            letter-spacing: 0.3px;
         }
         
         .error {
-            color: #ffff00;
-            background: linear-gradient(45deg, #cc0000, #ff0000);
-            padding: 15px;
-            border-radius: 10px;
+            color: #d47aa0;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.8), 
+                    rgba(255, 182, 193, 0.2)
+                );
+            padding: 12px;
+            border-radius: 0;
             margin-top: 15px;
-            border: 2px solid #ffff00;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000000;
-            animation: errorblink 0.5s ease infinite;
-        }
-        
-        @keyframes errorblink {
-            0%, 100% { background: linear-gradient(45deg, #cc0000, #ff0000); }
-            50% { background: linear-gradient(45deg, #ff0000, #ff4500); }
+            border: 1px solid #ffb6c1;
+            font-weight: 500;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            box-shadow: 2px 2px 0px rgba(212, 122, 160, 0.2);
         }
         
         .blessing {
-            margin-top: 20px;
+            margin-top: 25px;
             padding: 15px;
-            background: linear-gradient(45deg, #ff4500, #ff8c00);
-            border: 2px solid #ffff00;
-            border-radius: 12px;
-            color: #000000;
-            font-size: 16px;
-            line-height: 1.5;
-            font-weight: 900;
-            text-shadow: 1px 1px 0px #ffffff;
-            box-shadow: 0 0 15px #ff8c00;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.8), 
+                    rgba(221, 160, 221, 0.15)
+                );
+            border: 1px solid #dda0dd;
+            border-radius: 0;
+            color: #8b7da8;
+            font-size: 12px;
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            box-shadow: 2px 2px 0px rgba(221, 160, 221, 0.2);
         }
         
         .icons {
-            font-size: 24px;
-            margin: 0 8px;
-            animation: iconrotate 2s linear infinite;
+            font-size: 16px;
+            margin: 0 6px;
+            opacity: 0.8;
+            animation: gentlebounce 4s ease infinite;
         }
         
-        @keyframes iconrotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes gentlebounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-2px); }
         }
         
         @media (max-width: 480px) {
             .container {
-                margin: 10px;
-                padding: 25px 15px;
+                margin: 15px;
+                padding: 25px 20px;
             }
             
             h1 {
-                font-size: 28px;
+                font-size: 22px;
             }
             
             .groom-bride {
-                font-size: 24px;
+                font-size: 18px;
             }
             
-            .angry-decoration {
-                font-size: 35px;
+            .y2k-decoration {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="angry-decoration">😡💢😤</div>
+        <div class="y2k-decoration">◦ ∗ ◦ 💿 ◦ ∗ ◦</div>
         
-        <h1>결혼식 강제참석</h1>
-        <div class="subtitle">안 오면 절교각오해</div>
+        <h1>wedding.exe</h1>
+        <div class="subtitle">loading love story...</div>
         
         <div class="wedding-info">
-            <div class="groom-bride">👰‍♀️ 유호재 🤵‍♂️</div>
-            <div class="destination">📍 현대백화점 판교점</div>
-            <div class="date-time">🗓️ 무조건 와야하는 날</div>
+            <div class="groom-bride">✧ yuhojae.user ✧</div>
+            <div class="destination">📍 hyundai dept. pangyo</div>
+            <div class="date-time">system date: special day</div>
         </div>
         
         <div class="nav-section">
-            <div class="section-title">🚗 빨리 길찾기해</div>
+            <div class="section-title">gps protocol</div>
             
             <a id="share-location" href="javascript:shareLocation()">
-                <span class="icons">🔥</span>
-                지금 당장 네비켜
-                <span class="icons">⚡</span>
+                <span class="icons">◯</span>
+                execute navigation
+                <span class="icons">◦</span>
             </a>
         </div>
         
         <div class="info">
-            📲 버튼 안 누르면 진짜 화낸다<br>
-            결혼식장 길 모르면 못온거야
+            ▷ click to initialize gps module<br>
+            ▷ route calculation ready
         </div>
         
         <div class="blessing">
-            💀 절대 늦지마라 절대 안빠지게 해줄거야<br>
-            친구라면 무조건 와야해 알겠어? 💀
+            ✧･ﾟ: *✧･ﾟ:* celebrating digital love *:･ﾟ✧*:･ﾟ✧<br>
+            y2k compatibility confirmed ♡
         </div>
         
         <div id="error-message" class="error" style="display: none;"></div>
     </div>
 
     <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
+    <script defer src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
             integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
             crossorigin="anonymous"></script>
     
@@ -356,15 +380,26 @@
                 // 자동 실행일 때는 바로 내비 실행, 수동일 때는 공유
                 const urlParams = new URLSearchParams(window.location.search);
                 const isAutoMode = urlParams.get('auto') === 'true';
-    
-                Kakao.Navi.share({
-                    name: '유호재 결혼식 - 현대백화점 판교점',
-                    x: 127.11205203011632,
-                    y: 37.39279717586919,
-                    coordType: 'wgs84'
-                });
-                console.log('💌 결혼식장 위치 공유 창 열기');
-               
+                
+                if (isAutoMode) {
+                    // 자동 모드: 바로 카카오내비 실행
+                    Kakao.Navi.start({
+                        name: '유호재 결혼식 - 현대백화점 판교점',
+                        x: 127.11205203011632,
+                        y: 37.39279717586919,
+                        coordType: 'wgs84'
+                    });
+                    console.log('🚗 자동으로 네비게이션 시작');
+                } else {
+                    // 수동 모드: 공유 옵션 제공
+                    Kakao.Navi.share({
+                        name: '유호재 결혼식 - 현대백화점 판교점',
+                        x: 127.11205203011632,
+                        y: 37.39279717586919,
+                        coordType: 'wgs84'
+                    });
+                    console.log('💌 결혼식장 위치 공유 창 열기');
+                }
             } catch (error) {
                 console.error('네비게이션 실행 실패:', error);
                 showError('네비게이션을 실행할 수 없습니다. 카카오내비 앱이 설치되어 있는지 확인해주세요.');
@@ -390,9 +425,9 @@
             errorDiv.textContent = message;
             errorDiv.style.display = 'block';
         }
-        
-        // 페이지 로드 시 초기화 (SDK 로딩 대기 개선)
-        document.addEventListener('DOMContentLoaded', function() {
+
+        // 페이지 로드 시 초기화 (window.onload 사용)
+        window.onload = function() {
             // SDK 로딩을 위한 충분한 대기
             setTimeout(() => {
                 if (typeof Kakao === 'undefined') {
@@ -415,6 +450,7 @@
                 // 자동 실행 체크
                 checkAutoStart();
             }, 1000);
+        };
     </script>
 </body>
 </html>
