@@ -293,23 +293,46 @@
             errorDiv.style.display = 'block';
         }
 
-        // 페이지 로드 시 초기화
-        window.onload = function() {
-            if (typeof Kakao === 'undefined') {
-                showError('카카오 서비스를 로드할 수 없습니다.');
-                return;
-            }
+        // window.onload 대신 DOMContentLoaded 사용
+        document.addEventListener('DOMContentLoaded', function() {
+            // SDK 로딩 대기
+            setTimeout(() => {
+                if (typeof Kakao === 'undefined') {
+                    showError('카카오 서비스를 로드할 수 없습니다.');
+                    return;
+                }
+                
+                if (!Kakao.isInitialized()) {
+                    try {
+                        Kakao.init('57c4586996128697ee51e27bfd6a84d5');
+                    } catch (error) {
+                        showError('카카오 서비스 초기화 실패');
+                        return;
+                    }
+                }
+                
+                checkAutoStart();
+            }, 1000);
+        });
+
+        
+        // // 페이지 로드 시 초기화
+        // window.onload = function() {
+        //     if (typeof Kakao === 'undefined') {
+        //         showError('카카오 서비스를 로드할 수 없습니다.');
+        //         return;
+        //     }
             
-            if (!Kakao.isInitialized()) {
-                showError('카카오 서비스가 초기화되지 않았습니다.');
-                return;
-            }
+        //     if (!Kakao.isInitialized()) {
+        //         showError('카카오 서비스가 초기화되지 않았습니다.');
+        //         return;
+        //     }
             
-            console.log('💒 유호재 결혼식 네비게이션 준비 완료!');
+        //     console.log('💒 유호재 결혼식 네비게이션 준비 완료!');
             
-            // 자동 실행 체크
-            checkAutoStart();
-        };
+        //     // 자동 실행 체크
+        //     checkAutoStart();
+        // };
     </script>
 </body>
 </html>
