@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>유호재 결혼식 네비게이션</title>
-        <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
-            integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
-            crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -243,6 +239,11 @@
         
         <div id="error-message" class="error" style="display: none;"></div>
     </div>
+
+    <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
+    <script defer src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
+            integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
+            crossorigin="anonymous"></script>
     
     <script>
         // 카카오 SDK 초기화
@@ -259,14 +260,26 @@
                 // 자동 실행일 때는 바로 내비 실행, 수동일 때는 공유
                 const urlParams = new URLSearchParams(window.location.search);
                 const isAutoMode = urlParams.get('auto') === 'true';
-                // 수동 모드: 공유 옵션 제공
-                Kakao.Navi.share({
-                    name: '유호재 결혼식 - 현대백화점 판교점',
-                    x: 127.11205203011632,
-                    y: 37.39279717586919,
-                    coordType: 'wgs84'
-                });
-                console.log('💌 결혼식장 위치 열기');
+                
+                if (isAutoMode) {
+                    // 자동 모드: 바로 카카오내비 실행
+                    Kakao.Navi.start({
+                        name: '유호재 결혼식 - 현대백화점 판교점',
+                        x: 127.11205203011632,
+                        y: 37.39279717586919,
+                        coordType: 'wgs84'
+                    });
+                    console.log('🚗 자동으로 네비게이션 시작');
+                } else {
+                    // 수동 모드: 공유 옵션 제공
+                    Kakao.Navi.share({
+                        name: '유호재 결혼식 - 현대백화점 판교점',
+                        x: 127.11205203011632,
+                        y: 37.39279717586919,
+                        coordType: 'wgs84'
+                    });
+                    console.log('💌 결혼식장 위치 공유 창 열기');
+                }
             } catch (error) {
                 console.error('네비게이션 실행 실패:', error);
                 showError('네비게이션을 실행할 수 없습니다. 카카오내비 앱이 설치되어 있는지 확인해주세요.');
@@ -293,9 +306,9 @@
             errorDiv.style.display = 'block';
         }
 
-        // window.onload 대신 DOMContentLoaded 사용
+        // 페이지 로드 시 초기화 (SDK 로딩 대기 개선)
         document.addEventListener('DOMContentLoaded', function() {
-            // SDK 로딩 대기
+            // SDK 로딩을 위한 충분한 대기
             setTimeout(() => {
                 if (typeof Kakao === 'undefined') {
                     showError('카카오 서비스를 로드할 수 없습니다.');
@@ -305,34 +318,19 @@
                 if (!Kakao.isInitialized()) {
                     try {
                         Kakao.init('57c4586996128697ee51e27bfd6a84d5');
+                        console.log('💒 카카오 SDK 재초기화 완료');
                     } catch (error) {
-                        showError('카카오 서비스 초기화 실패');
+                        showError('카카오 서비스 초기화에 실패했습니다.');
                         return;
                     }
                 }
                 
+                console.log('💒 유호재 결혼식 네비게이션 준비 완료!');
+                
+                // 자동 실행 체크
                 checkAutoStart();
             }, 1000);
         });
-
-        
-        // // 페이지 로드 시 초기화
-        // window.onload = function() {
-        //     if (typeof Kakao === 'undefined') {
-        //         showError('카카오 서비스를 로드할 수 없습니다.');
-        //         return;
-        //     }
-            
-        //     if (!Kakao.isInitialized()) {
-        //         showError('카카오 서비스가 초기화되지 않았습니다.');
-        //         return;
-        //     }
-            
-        //     console.log('💒 유호재 결혼식 네비게이션 준비 완료!');
-            
-        //     // 자동 실행 체크
-        //     checkAutoStart();
-        // };
     </script>
 </body>
 </html>
