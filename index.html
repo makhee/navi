@@ -3,426 +3,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>유호재 결혼식 네비게이션</title>
+    <title>카카오맵 테스트 - GitHub Pages</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Courier New', 'MS Gothic', monospace;
-            background: linear-gradient(180deg, #e6f3ff 0%, #f0f8ff 50%, #fff0f8 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
             padding: 20px;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 4px,
-                    rgba(173, 216, 230, 0.1) 4px,
-                    rgba(173, 216, 230, 0.1) 8px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 4px,
-                    rgba(255, 182, 193, 0.1) 4px,
-                    rgba(255, 182, 193, 0.1) 8px
-                );
-            pointer-events: none;
-            z-index: 1;
+            background-color: #f5f5f5;
         }
         
         .container {
-            max-width: 380px;
-            width: 100%;
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.95), 
-                    rgba(173, 216, 230, 0.1), 
-                    rgba(255, 182, 193, 0.1)
-                );
-            border: 2px solid #add8e6;
-            border-radius: 0;
-            padding: 30px 25px;
-            box-shadow: 
-                4px 4px 0px #ffb6c1,
-                8px 8px 0px rgba(173, 216, 230, 0.3);
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
             text-align: center;
-            position: relative;
-            z-index: 2;
         }
         
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            height: 2px;
-            background: linear-gradient(90deg, #add8e6, #ffb6c1, #dda0dd);
-            opacity: 0.6;
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
         }
         
-        .y2k-decoration {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #6b8db5;
-            animation: gentlefade 3s ease infinite;
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
         }
         
-        @keyframes gentlefade {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        h1 {
-            color: #4a6fa5;
+        .control-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .control-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .control-item label {
+            font-weight: 600;
             margin-bottom: 8px;
-            font-size: 24px;
-            font-weight: 700;
-            text-transform: lowercase;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 0px rgba(255, 182, 193, 0.5);
+            color: #495057;
+            font-size: 0.9em;
         }
         
-        .subtitle {
-            color: #8b7da8;
-            font-size: 14px;
-            margin-bottom: 25px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-        
-        .wedding-info {
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.8), 
-                    rgba(173, 216, 230, 0.15)
-                );
-            border: 1px solid #add8e6;
-            border-radius: 0;
-            padding: 20px;
-            margin-bottom: 25px;
-            position: relative;
-        }
-        
-        .wedding-info::before {
-            content: '◦ wedding data ◦';
-            position: absolute;
-            top: -8px;
-            left: 15px;
-            background: #f0f8ff;
-            color: #6b8db5;
-            padding: 2px 8px;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        .groom-bride {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #5a7ba5;
-            letter-spacing: 1px;
-            text-transform: lowercase;
-        }
-        
-        .destination {
-            font-size: 16px;
-            color: #8b7da8;
-            margin-bottom: 8px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        
-        .date-time {
-            font-size: 12px;
-            color: #a8a8a8;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-        
-        .nav-section {
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.6), 
-                    rgba(221, 160, 221, 0.1)
-                );
-            border: 1px solid #dda0dd;
-            border-radius: 0;
-            padding: 20px;
-            margin: 25px 0;
-            position: relative;
-        }
-        
-        .nav-section::before {
-            content: '◦ navigation ◦';
-            position: absolute;
-            top: -8px;
-            left: 15px;
-            background: #f0f8ff;
-            color: #8b7da8;
-            padding: 2px 8px;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        .section-title {
-            color: #8b7da8;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            text-transform: lowercase;
-        }
-        
-        #share-location {
-            display: inline-block;
-            padding: 12px 24px;
-            background: 
-                linear-gradient(135deg, 
-                    #add8e6, 
-                    #b6d7f0
-                );
-            border: 1px solid #87ceeb;
-            border-radius: 0;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: lowercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 
-                2px 2px 0px rgba(255, 182, 193, 0.4);
-            margin: 10px 0;
-            position: relative;
-        }
-        
-        #share-location::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        #share-location:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: 
-                3px 3px 0px rgba(255, 182, 193, 0.6);
-        }
-        
-        #share-location:hover::before {
-            opacity: 1;
-        }
-        
-        .info {
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.7), 
-                    rgba(173, 216, 230, 0.1)
-                );
-            border: 1px solid rgba(173, 216, 230, 0.5);
-            border-radius: 0;
-            padding: 15px;
-            font-size: 12px;
-            color: #6b8db5;
-            line-height: 1.6;
-            margin-top: 25px;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-        }
-        
-        .error {
-            color: #d47aa0;
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.8), 
-                    rgba(255, 182, 193, 0.2)
-                );
+        .control-item input, .control-item select {
             padding: 12px;
-            border-radius: 0;
-            margin-top: 15px;
-            border: 1px solid #ffb6c1;
-            font-weight: 500;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            box-shadow: 2px 2px 0px rgba(212, 122, 160, 0.2);
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
         }
         
-        .blessing {
-            margin-top: 25px;
-            padding: 15px;
-            background: 
-                linear-gradient(135deg, 
-                    rgba(255, 255, 255, 0.8), 
-                    rgba(221, 160, 221, 0.15)
-                );
-            border: 1px solid #dda0dd;
-            border-radius: 0;
-            color: #8b7da8;
-            font-size: 12px;
-            line-height: 1.6;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-            box-shadow: 2px 2px 0px rgba(221, 160, 221, 0.2);
+        .control-item input:focus, .control-item select:focus {
+            outline: none;
+            border-color: #667eea;
         }
         
-        .icons {
-            font-size: 16px;
-            margin: 0 6px;
-            opacity: 0.8;
-            animation: gentlebounce 4s ease infinite;
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         
-        @keyframes gentlebounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-2px); }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
         
-        @media (max-width: 480px) {
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .map-container {
+            position: relative;
+            padding: 30px;
+        }
+        
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #6c757d;
+        }
+        
+        .status {
+            position: absolute;
+            top: 45px;
+            right: 45px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+        }
+        
+        .status.loading {
+            color: #007bff;
+        }
+        
+        .status.success {
+            color: #28a745;
+        }
+        
+        .status.error {
+            color: #dc3545;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-card h3 {
+            margin: 0 0 10px 0;
+            color: #495057;
+            font-size: 1.1em;
+        }
+        
+        .info-card p {
+            margin: 0;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
             .container {
-                margin: 15px;
-                padding: 25px 20px;
+                margin: 0;
+                border-radius: 0;
             }
             
-            h1 {
-                font-size: 22px;
+            .control-group {
+                grid-template-columns: 1fr;
             }
             
-            .groom-bride {
-                font-size: 18px;
+            .button-group {
+                flex-direction: column;
             }
             
-            .y2k-decoration {
-                font-size: 16px;
+            .btn {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="y2k-decoration">◦ ∗ ◦ 💿 ◦ ∗ ◦</div>
-        
-        <h1>wedding.exe</h1>
-        <div class="subtitle">loading love story...</div>
-        
-        <div class="wedding-info">
-            <div class="groom-bride">✧ yuhojae.user ✧</div>
-            <div class="destination">📍 hyundai dept. pangyo</div>
-            <div class="date-time">system date: special day</div>
+        <div class="header">
+            <h1>🗺️ 카카오맵 테스트</h1>
+            <p>GitHub Pages에서 카카오맵 API 테스트</p>
         </div>
         
-        <div class="nav-section">
-            <div class="section-title">gps protocol</div>
+        <div class="controls">
+            <div class="control-group">
+                <div class="control-item">
+                    <label for="apiKey">API Key</label>
+                    <input type="text" id="apiKey" value="57c4586996128697ee51e27bfd6a84d5" placeholder="카카오 JavaScript API 키">
+                </div>
+                
+                <div class="control-item">
+                    <label for="latitude">위도 (Latitude)</label>
+                    <input type="number" id="latitude" value="37.5665" step="0.0001" placeholder="37.5665">
+                </div>
+                
+                <div class="control-item">
+                    <label for="longitude">경도 (Longitude)</label>
+                    <input type="number" id="longitude" value="126.9780" step="0.0001" placeholder="126.9780">
+                </div>
+                
+                <div class="control-item">
+                    <label for="level">줌 레벨 (1-14)</label>
+                    <input type="number" id="level" value="3" min="1" max="14" placeholder="3">
+                </div>
+            </div>
             
-            <a id="share-location" href="javascript:void(0)" onclick="shareLocation()">
-                <span class="icons">◯</span>
-                execute navigation
-                <span class="icons">◦</span>
-            </a>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="initializeMap()">🗺️ 지도 로드</button>
+                <button class="btn btn-secondary" onclick="addMarker()">📍 마커 추가</button>
+                <button class="btn btn-secondary" onclick="moveToSeoul()">🏙️ 서울로 이동</button>
+                <button class="btn btn-secondary" onclick="moveToBuilsan()">🌊 부산으로 이동</button>
+                <button class="btn btn-secondary" onclick="clearMap()">🗑️ 지도 초기화</button>
+            </div>
         </div>
         
-        <div class="info">
-            ▷ click to initialize gps module<br>
-            ▷ route calculation ready
+        <div class="map-container">
+            <div class="status loading" id="status">지도 로딩 대기중...</div>
+            <div id="map">
+                지도를 로드하려면 "지도 로드" 버튼을 클릭하세요
+            </div>
         </div>
         
-        <div class="blessing">
-            ✧･ﾟ: *✧･ﾟ:* celebrating digital love *:･ﾟ✧*:･ﾟ✧<br>
-            y2k compatibility confirmed ♡
+        <div class="controls">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📋 현재 설정</h3>
+                    <p id="currentInfo">
+                        위도: 37.5665<br>
+                        경도: 126.9780<br>
+                        줌 레벨: 3
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🔧 사용 방법</h3>
+                    <p>
+                        1. API 키를 입력하세요<br>
+                        2. 좌표와 줌 레벨을 설정하세요<br>
+                        3. "지도 로드" 버튼을 클릭하세요
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>ℹ️ 정보</h3>
+                    <p>
+                        이 페이지는 GitHub Pages에서<br>
+                        카카오맵 API를 테스트하기 위한<br>
+                        데모 페이지입니다.
+                    </p>
+                </div>
+            </div>
         </div>
-        
-        <div id="error-message" class="error" style="display: none;"></div>
     </div>
 
-    <!-- 카카오 JavaScript SDK (최신 버전 2.7.5) -->
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" 
-            integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" 
-            crossorigin="anonymous"></script>
-    
     <script>
-        function shareLocation() {
-            try {              
-                // 카카오내비 실행
-                Kakao.Navi.start({
-                    name: '유호재 결혼식 - 현대백화점 판교점',
-                    x: 127.11205203011632,
-                    y: 37.39279717586919,
-                    coordType: 'wgs84'
-                });
-                console.log('🚗 네비게이션 시작');
-               
+        let map = null;
+        let markers = [];
+        
+        function updateStatus(message, type = 'loading') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+        
+        function updateCurrentInfo() {
+            const lat = document.getElementById('latitude').value;
+            const lng = document.getElementById('longitude').value;
+            const level = document.getElementById('level').value;
+            
+            document.getElementById('currentInfo').innerHTML = `
+                위도: ${lat}<br>
+                경도: ${lng}<br>
+                줌 레벨: ${level}
+            `;
+        }
+        
+        function loadKakaoMapScript() {
+            return new Promise((resolve, reject) => {
+                // 이미 로드된 경우
+                if (window.kakao && window.kakao.maps) {
+                    resolve();
+                    return;
+                }
+                
+                // 기존 스크립트 제거
+                const existingScript = document.querySelector('script[src*="dapi.kakao.com"]');
+                if (existingScript) {
+                    existingScript.remove();
+                }
+                
+                const apiKey = document.getElementById('apiKey').value;
+                if (!apiKey) {
+                    reject(new Error('API 키가 필요합니다'));
+                    return;
+                }
+                
+                const script = document.createElement('script');
+                script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}`;
+                script.async = true;
+                
+                script.onload = () => {
+                    console.log('카카오맵 스크립트 로드 성공');
+                    if (window.kakao && window.kakao.maps) {
+                        resolve();
+                    } else {
+                        reject(new Error('카카오맵 객체를 찾을 수 없습니다'));
+                    }
+                };
+                
+                script.onerror = () => {
+                    reject(new Error('카카오맵 스크립트 로드 실패'));
+                };
+                
+                document.head.appendChild(script);
+            });
+        }
+        
+        async function initializeMap() {
+            try {
+                updateStatus('카카오맵 스크립트 로딩중...', 'loading');
+                
+                await loadKakaoMapScript();
+                
+                updateStatus('지도 초기화중...', 'loading');
+                
+                const lat = parseFloat(document.getElementById('latitude').value);
+                const lng = parseFloat(document.getElementById('longitude').value);
+                const level = parseInt(document.getElementById('level').value);
+                
+                const mapContainer = document.getElementById('map');
+                const mapOption = {
+                    center: new kakao.maps.LatLng(lat, lng),
+                    level: level
+                };
+                
+                map = new kakao.maps.Map(mapContainer, mapOption);
+                
+                // 기본 마커 추가
+                addMarker();
+                
+                updateStatus('지도 로드 완료!', 'success');
+                updateCurrentInfo();
+                
+                console.log('카카오맵 초기화 완료');
+                
             } catch (error) {
-                console.error('네비게이션 실행 실패:', error);
-                showError('네비게이션을 실행할 수 없습니다. 카카오내비 앱이 설치되어 있는지 확인해주세요.');
+                console.error('카카오맵 초기화 실패:', error);
+                updateStatus(`오류: ${error.message}`, 'error');
+                
+                // 오류 발생시 상세 정보 표시
+                document.getElementById('map').innerHTML = `
+                    <div style="text-align: center; color: #dc3545;">
+                        <h3>🚫 지도 로드 실패</h3>
+                        <p>${error.message}</p>
+                        <p style="font-size: 14px; opacity: 0.8;">
+                            API 키와 도메인 설정을 확인해주세요
+                        </p>
+                    </div>
+                `;
             }
         }
-
-        // URL 파라미터에서 자동 실행 여부 확인
-        function checkAutoStart() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const shouldAutoStart = urlParams.get('auto') === 'true';
+        
+        function addMarker() {
+            if (!map) {
+                alert('먼저 지도를 로드해주세요');
+                return;
+            }
             
-            if (shouldAutoStart) {
-                console.log('💝 자동 네비게이션 모드 감지됨');
-                // 약간의 지연 후 자동 실행
+            const lat = parseFloat(document.getElementById('latitude').value);
+            const lng = parseFloat(document.getElementById('longitude').value);
+            
+            const markerPosition = new kakao.maps.LatLng(lat, lng);
+            const marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+            
+            marker.setMap(map);
+            markers.push(marker);
+            
+            // 지도 중심 이동
+            map.setCenter(markerPosition);
+            
+            updateStatus(`마커 추가됨 (${markers.length}개)`, 'success');
+        }
+        
+        function moveToSeoul() {
+            document.getElementById('latitude').value = '37.5665';
+            document.getElementById('longitude').value = '126.9780';
+            document.getElementById('level').value = '3';
+            
+            if (map) {
+                const center = new kakao.maps.LatLng(37.5665, 126.9780);
+                map.setCenter(center);
+                map.setLevel(3);
+                updateCurrentInfo();
+                updateStatus('서울로 이동 완료', 'success');
+            }
+        }
+        
+        function moveToBuilsan() {
+            document.getElementById('latitude').value = '35.1796';
+            document.getElementById('longitude').value = '129.0756';
+            document.getElementById('level').value = '3';
+            
+            if (map) {
+                const center = new kakao.maps.LatLng(35.1796, 129.0756);
+                map.setCenter(center);
+                map.setLevel(3);
+                updateCurrentInfo();
+                updateStatus('부산으로 이동 완료', 'success');
+            }
+        }
+        
+        function clearMap() {
+            if (map) {
+                // 모든 마커 제거
+                markers.forEach(marker => marker.setMap(null));
+                markers = [];
+                
+                document.getElementById('map').innerHTML = '';
+                map = null;
+                
+                updateStatus('지도 초기화 완료', 'success');
+                
                 setTimeout(() => {
-                    shareLocation();
+                    document.getElementById('map').innerHTML = '지도를 로드하려면 "지도 로드" 버튼을 클릭하세요';
+                    updateStatus('지도 로딩 대기중...', 'loading');
                 }, 1000);
             }
         }
-
-        function showError(message) {
-            const errorDiv = document.getElementById('error-message');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-        }
-
-        // 페이지 로드 시 초기화 (window.onload 사용)
-        window.onload = function() {
-            // SDK 로딩을 위한 충분한 대기
-            setTimeout(() => {              
-                if (!Kakao.isInitialized()) {
-                    try {
-                        Kakao.init('57c4586996128697ee51e27bfd6a84d5');
-                        console.log('💒 카카오 SDK 초기화 완료');
-                    } catch (error) {
-                        showError('카카오 서비스 초기화에 실패했습니다.');
-                        return;
-                    }
-                }
-                
-                console.log('💒 유호재 결혼식 네비게이션 준비 완료!');
-                
-                // 자동 실행 체크
-                checkAutoStart();
-            }, 1000);
-        };
+        
+        // 입력값 변경시 정보 업데이트
+        document.getElementById('latitude').addEventListener('input', updateCurrentInfo);
+        document.getElementById('longitude').addEventListener('input', updateCurrentInfo);
+        document.getElementById('level').addEventListener('input', updateCurrentInfo);
+        
+        // 페이지 로드시 초기 정보 표시
+        updateCurrentInfo();
+        
+        // 엔터키로 지도 로드
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                initializeMap();
+            }
+        });
+        
+        console.log('카카오맵 테스트 페이지 로드 완료');
+        console.log('GitHub Pages 도메인을 카카오 개발자 콘솔에 등록했는지 확인하세요');
     </script>
 </body>
 </html>
